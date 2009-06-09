@@ -8,7 +8,7 @@
 .dynamictable-caption {
 	border-bottom:2px solid #CCCCCC;
 	font-weight:bold;
-	height:19px;
+	height:1.1em;
 	padding:0 0 0 0.5em;
 	font-size: 12pt;
 	padding-top: 6px;
@@ -314,7 +314,9 @@ li.dynamictable-captionaction {
 	padding-left:7px;
 	padding-right:7px;
 	white-space:nowrap !important;
-	width:43px;
+	font-variant: normal;
+	font-style: normal;
+	width:48px;
 }
 .actionColumn .edit:hover {
 	color: #e50;
