@@ -60,7 +60,7 @@
                 close: function() {
                     me.destroy();
                 },
-                width: 600, height: '',
+                width: 740, height: '',
                 title: "Select users",
                 resizable: false,
                 modal: true,

@@ -25,9 +25,9 @@
 			$("<td />").text("Project").appendTo(this.projectRow);
 			$("<td />").text("Iteration").appendTo(this.iterationRow);
 			$("<td />").text("Story").appendTo(this.storyRow);
-			this.productSelect = $("<select />").appendTo($("<td />").appendTo(this.productRow)).width("80%");
-			this.projectSelect = $("<select />").appendTo($("<td />").appendTo(this.projectRow)).width("80%");
-			this.iterationSelect = $("<select />").appendTo($("<td />").appendTo(this.iterationRow)).width("80%");
+			this.productSelect = $("<select />").appendTo($("<td />").appendTo(this.productRow)).width("80%").val(0);
+			this.projectSelect = $("<select />").appendTo($("<td />").appendTo(this.projectRow)).width("80%").val(0);
+			this.iterationSelect = $("<select />").appendTo($("<td />").appendTo(this.iterationRow)).width("80%").val(0);
 			this.storySelect = $("<select />").appendTo($("<td />").appendTo(this.storyRow)).width("80%");
 			var me = this;
 			this.updateSelect(this.productSelect, 0, "Select product");

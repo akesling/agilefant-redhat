@@ -114,7 +114,7 @@ IterationController.prototype = {
     		buttons: {
 	    		'Move': function() {
     				var iteration = sel.iterationSelect("getSelected");
-    				if(iteration < 1) {
+    				if(!iteration || iteration < 1) {
     					err.text("Please select an iteration.").show();
     					return;
     				} else if(iteration != goal.iteration.iterationId){
@@ -764,7 +764,7 @@ IterationGoalController.prototype = {
 		sel.iterationSelect({selectStory: true});
     	parent.dialog({
     		resizable: false,
-    		height:200,
+    		height:250,
     		width: 700,
     		title: "Move task",
     		modal: true,
@@ -773,7 +773,7 @@ IterationGoalController.prototype = {
 	    		'Move': function() {
     				var story = sel.iterationSelect("getStory");
     				var iteration = sel.iterationSelect("getSelected");
-    				if(iteration < 1) {
+    				if(!iteration || iteration < 1) {
     					err.text("Please select an iteration.").show();
     					return;
     				} else if(story !== task.iterationGoal.id && task.iterationGoal.id !== 0){
