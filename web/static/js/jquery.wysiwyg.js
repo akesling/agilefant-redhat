@@ -1,16 +1,16 @@
 /**
- * WYSIWYG - jQuery plugin 0.4
+ * WYSIWYG - jQuery plugin 0.5
  *
- * Copyright (c) 2008 Juan M Martinez
+ * Copyright (c) 2008-2009 Juan M Martinez
  * http://plugins.jquery.com/project/jWYSIWYG
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
  *   http://www.gnu.org/licenses/gpl.html
  *
- *
  * 090526 Reko: Made changes to method appendMenu to add tooltips to buttons.
  *              Also added the method camelcaseToTooltip for the purpose. 
+ *
  *
  *
  * $Id: $
@@ -91,8 +91,8 @@
             messages : {}
         }, options);
 
-        $.extend(options.messages, Wysiwyg.MSGS_EN);
-        $.extend(options.controls, Wysiwyg.TOOLBAR);
+        options.messages = $.extend(true, options.messages, Wysiwyg.MSGS_EN);
+        options.controls = $.extend(true, options.controls, Wysiwyg.TOOLBAR);
 
         for ( var control in controls )
         {
@@ -108,14 +108,13 @@
             Wysiwyg(this, options);
         });
     };
-    
+
     function Wysiwyg( element, options )
     {
         return this instanceof Wysiwyg
             ? this.init(element, options)
             : new Wysiwyg(element, options);
     }
-    
 
     $.extend(Wysiwyg, {
         insertImage : function( szURL, attributes )
@@ -162,6 +161,13 @@
                 else if ( self.options.messages.nonSelection )
                     alert(self.options.messages.nonSelection);
             }
+        },
+
+        setContent : function( newContent )
+        {
+            var self = $.data(this, 'wysiwyg');
+                self.setContent( newContent );
+                self.saveContent();
         },
 
         clear : function()
@@ -386,7 +392,11 @@
             this.viewHTML = false;
 
             this.initialHeight = newY - 8;
-            this.initialContent = $(element).text();
+
+            /**
+             * @link http://code.google.com/p/jwysiwyg/issues/detail?id=52
+             */
+            this.initialContent = $(element).val();
 
             this.initFrame();
 
@@ -395,6 +405,12 @@
 
             if ( this.options.autoSave )
                 $('form').submit(function() { self.saveContent(); });
+
+            $('form').bind('reset', function()
+            {
+                self.setContent( self.initialContent );
+                self.saveContent();
+            });
         },
         cancel: function() {
             this.setContent( this.initialContent );
@@ -461,7 +477,8 @@
                 /**
                  * @link http://code.google.com/p/jwysiwyg/issues/detail?id=11
                  */
-                $(this.editorDoc).keyup(function() { self.saveContent(); })
+                $(this.editorDoc).keydown(function() { self.saveContent(); })
+                                 .keyup(function() { self.saveContent(); })
                                  .mouseup(function() { self.saveContent(); });
             }
 

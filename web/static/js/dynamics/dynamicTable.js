@@ -93,7 +93,7 @@
 				}
 			}
 			this.rows = rows;
-			$(document.body).trigger("dynamictable-close-actions");
+			$(window).trigger("dynamictable-close-actions");
 		},
 		getElement: function() {
 			return this.table;

@@ -521,7 +521,7 @@ IterationGoalController.prototype = {
 			  if (bli.getState() == "DONE") {
 			    return false;
 			  }
-			  else if (!bli.getOriginalEstimate()) {
+			  else if (!bli.getOriginalEstimate() && bli.getOriginalEstimate() !== 0) {
 			    return true;
 			  }
 			  else if (noAutoClose) {
