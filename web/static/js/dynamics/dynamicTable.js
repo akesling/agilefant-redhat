@@ -1164,7 +1164,7 @@
 		              }, 'task-row');
 		  }
 	      addTableColumn(opts,
-	    		  { minwidth: 45, auto: true },
+	    		  { minwidth: 55, auto: true },
 	              { name: 'Actions',
 		            tooltip: "",
 		            sort: null
@@ -1185,7 +1185,7 @@
                 '*': { 'background-color': '#eee' }
       };          
       addTableColumn(opts,
-          { minwidth: 380, auto: true },
+          { minwidth: 360, auto: true },
               { name: 'Name',
                 tooltip: 'TODO name',
                 sort: agilefantUtils.comparators.nameComparator
@@ -1197,7 +1197,7 @@
                 sort: null
               });
       addTableColumn(opts,
-          { minwidth: 100, auto: true },
+          { minwidth: 70, auto: true },
               { name: 'Actions',
               tooltip: "",
               sort: null
@@ -1215,7 +1215,7 @@
     opts.colCss = {'*': { 'background-color': '#eee' }
     };          
     addTableColumn(opts,
-        { minwidth: 100, auto: true },
+        { minwidth: 80, auto: true },
             { name: 'Date',
               tooltip: 'Date',
               sort: null
@@ -1233,7 +1233,7 @@
               sort: null
             });
     addTableColumn(opts,
-        { minwidth: 250, auto: true },
+        { minwidth: 200, auto: true },
             { name: 'Comment',
               tooltip: 'Comment',
               sort: null
