@@ -233,6 +233,10 @@
 			for(var i = 0; i < sorted.length; i++) {
 				sorted[i].row.appendTo(this.table);
 			}
+			//sort removes the contained rows from DOM tree, which causes
+			//problems with the wysiwyg editor, which utilizes iframes
+			var wysiwygs = this.table.find(".wysiwyg-data");
+			wysiwygs.wysiwyg("resetFrame");
 		},
 		updateSortArrow: function(col, dir) {
 			this.headerRow.getElement().find('.' + cssClasses.sortImg).removeClass(cssClasses.sortImgDown)
@@ -495,7 +499,7 @@
 			}
 		},
 		setValue: function(newValue) {
-		  this.value = newValue;
+		    this.value = newValue;
 			this.content.html(newValue);
 		},
 		getElement: function() {
@@ -699,8 +703,12 @@
 		if (!value) { 
 			value = "";
 		}
-		this.field = $('<textarea>' + value + '</textarea>').appendTo(this.cell.getElement()).width("80%");
-	    setUpWysiwyg(this.field);
+		this.field = $('<textarea>' + value + '</textarea>').appendTo(this.cell.getElement()).width("80%").addClass("wysiwyg-data");
+		this.field.wysiwyg({ controls : {
+	        separator04 : { visible : true },
+	        insertOrderedList : { visible : true },
+	        insertUnorderedList : { visible : true }
+	    }});
 	    this.editor = this.cell.getElement().find(".wysiwyg");
 	    this.editorBody = this.editor.find("iframe").contents();
 	    this.editorBody.focus();

@@ -579,9 +579,9 @@ IterationGoalController.prototype = {
 			buttons: {
 				save: {text: "Save", action: saveCb},
 			cancel: {text: "Cancel", action: function() {
+				row.cancelEdit();
 				bli.rollBack();
 				desc.getElement().hide();
-				row.cancelEdit();
 				return false;
 			}}
 			}});

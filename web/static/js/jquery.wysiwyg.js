@@ -176,7 +176,19 @@
                 self.setContent('');
                 self.saveContent();
         },
+        
+        remove: function() {
+        	var self = $.data(this, 'wysiwyg');
+        	self.saveContent();
+        	self.element.remove();
+        },
 
+        resetFrame: function() {
+        	var self = $.data(this, 'wysiwyg');
+        	self.initFrame();
+        	self.setContent( $(self.original).val() );
+        },
+        
         MSGS_EN : {
             nonSelection : 'select the text you wish to link'
         },
