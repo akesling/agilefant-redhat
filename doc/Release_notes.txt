@@ -1,6 +1,6 @@
-Agilefant 1.6 RC2
+Agilefant 1.6
 RELEASE NOTES
-2.6.2009 
+10.6.2009 
 
 INSTALLATION INSTRUCTIONS AND SYSTEM REQUIREMENTS
 -------------------------------------------------
