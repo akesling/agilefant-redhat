@@ -34,7 +34,10 @@
 			<result name="ajax_success" type="httpheader">
 				<param name="status">200</param>
 			</result>
-			<result name="rootException" type="chain">exceptionHandler</result>
+			<result name="rootException" type="chain">
+				<param name="location">exceptionHandler</param>
+				<param name="status">500</param>
+			</result>
 			<!-- <result name="dbException" type="chain">dbExceptionHandler</result> -->
 		</global-results>
 		 
