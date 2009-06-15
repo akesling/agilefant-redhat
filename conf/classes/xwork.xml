@@ -34,10 +34,7 @@
 			<result name="ajax_success" type="httpheader">
 				<param name="status">200</param>
 			</result>
-			<result name="rootException" type="chain">
-				<param name="location">exceptionHandler</param>
-				<param name="status">500</param>
-			</result>
+			<result name="rootException" type="chain">exceptionHandler</result>
 			<!-- <result name="dbException" type="chain">dbExceptionHandler</result> -->
 		</global-results>
 		 
@@ -48,7 +45,12 @@
 
 		<action name="exceptionHandler"
 			class="fi.hut.soberit.agilefant.web.ExceptionHandler" method="handleException">
-			<result name="success" type="dispatcher">/WEB-INF/jsp/fatalError.jsp</result>
+			<result name="success" type="dispatcher">
+			 <param name="location">/WEB-INF/jsp/fatalError.jsp</param>
+			 </result>
+			<result name="success" type="httpheader">
+        <param name="status">500</param>
+        </result>
 		</action>
 		<action name="dbExceptionHandler"
 			class="fi.hut.soberit.agilefant.web.ExceptionHandler" method="handleDbException">
@@ -144,7 +146,6 @@
 				<param name="status">400</param>
 			</result>
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/inc/ajaxProjectTypeResult.jsp</param>
 			</result>
 		</action>
@@ -196,7 +197,6 @@
 				<param name="status">400</param>
 			</result>
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/inc/ajaxBacklogItemResult.jsp</param>
 			</result>
 		</action>
@@ -222,7 +222,6 @@
 				<param name="status">400</param>
 			</result>
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/jsonData.jsp</param>
 			</result>
 		</action>
@@ -232,7 +231,6 @@
         <param name="status">400</param>
       </result>
       <result name="ajax_success" type="dispatcher">
-        <param name="status">200</param>
         <param name="location">/WEB-INF/jsp/jsonData.jsp</param>
       </result>
     </action>
@@ -243,7 +241,6 @@
         <param name="status">400</param>
       </result>
       <result name="ajax_success" type="dispatcher">
-        <param name="status">200</param>
         <param name="location">/WEB-INF/jsp/jsonData.jsp</param>
       </result>
     </action>
@@ -311,7 +308,6 @@
 				<param name="status">400</param>
 			</result>
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/inc/ajaxProjectResult.jsp</param>
 			</result>
 		</action>
@@ -405,7 +401,6 @@
         <param name="status">400</param>
       </result>
       <result name="ajax_success" type="dispatcher">
-        <param name="status">200</param>
         <param name="location">/WEB-INF/jsp/jsonData.jsp</param>
       </result>
 		</action>
@@ -490,14 +485,12 @@
 				<param name="status">400</param>
 			</result>
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/inc/ajaxIterationResult.jsp</param>
 			</result>
 		</action>
 		
 		<action name="iterationData" class="iterationAction" method="iterationContents">
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/jsonData.jsp</param>
 			</result>
 		</action>
@@ -533,7 +526,6 @@
 				<param name="status">400</param>
 			</result>
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/inc/ajaxUserResult.jsp</param>
 			</result>
 		</action>
@@ -563,7 +555,6 @@
 				<param name="status">400</param>
 			</result>
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/inc/ajaxTeamResult.jsp</param>
 			</result>
 		</action>
@@ -660,16 +651,14 @@
     </action>
 		<action name="storeIterationGoal" method="store"
 			class="iterationGoalAction">
-			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
-				<param name="location">/WEB-INF/jsp/jsonData.jsp</param>
-			</result>
+      <result name="ajax_success" type="dispatcher">
+        <param name="location">/WEB-INF/jsp/jsonData.jsp</param>
+      </result>
 		</action>
 		
     <action name="iterationGoalContents" method="getContents"
       class="iterationGoalAction">
       <result name="ajax_success" type="dispatcher">
-        <param name="status">200</param>
         <param name="location">/WEB-INF/jsp/jsonData.jsp</param>
       </result>
     </action>		
@@ -677,7 +666,6 @@
 		<action name="calculateIterationGoalMetrics" method="getMetrics"
       class="iterationGoalAction">
       <result name="ajax_success" type="dispatcher">
-        <param name="status">200</param>
         <param name="location">/WEB-INF/jsp/jsonData.jsp</param>
       </result>
     </action>
@@ -685,7 +673,6 @@
 		<action name="deleteIterationGoal" method="delete"
 			class="iterationGoalAction">
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/jsonData.jsp</param>
 			</result>
 		</action>
@@ -894,7 +881,6 @@
         <param name="status">400</param>
       </result>
       <result name="ajax_success" type="dispatcher">
-        <param name="status">200</param>
         <param name="location">/WEB-INF/jsp/jsonData.jsp</param>
       </result>
     </action>
@@ -943,7 +929,6 @@
 				<param name="status">400</param>
 			</result>
 			<result name="ajax_success" type="dispatcher">
-				<param name="status">200</param>
 				<param name="location">/WEB-INF/jsp/inc/ajaxBusinessThemeResult.jsp</param>
 			</result>
 		</action>	

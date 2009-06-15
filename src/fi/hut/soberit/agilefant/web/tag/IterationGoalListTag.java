@@ -1,5 +1,6 @@
 package fi.hut.soberit.agilefant.web.tag;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.jsp.JspException;
@@ -25,7 +26,7 @@ public class IterationGoalListTag extends SpringTagSupport {
         try {
             backlog = backlogBusiness.getBacklog(backlogId);
         } catch (ObjectNotFoundException e) {
-            throw new JspException(e);
+            return Tag.EVAL_BODY_INCLUDE;
         }
         if (backlog instanceof Iteration) {
             Collection<IterationGoal> goals = ((Iteration) backlog)

@@ -54,6 +54,11 @@ Timesheets
   + log spent effort to projects and/or individual backlog items
   + generate reports of spent effort
 
+CHANGES FROM AGILEFANT 1.6
+----------------------------
++ Fixed creating a new task/story from the create new link
++ Fixed multiple configuration issues on non-Windows environments
+
 CHANGES FROM AGILEFANT 1.5.5
 ----------------------------
 + Renovation of the iteration view (give us feedback at the forum!)
