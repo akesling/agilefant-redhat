@@ -270,7 +270,7 @@
 		</action>
 		<action name="ajaxCreateProject" method="create"
 			class="projectAction">
-			<result>/WEB-INF/jsp/forms/createProject.jsp</result>
+			<result type="dispatcher">/WEB-INF/jsp/forms/createProject.jsp</result>
 		</action>
 		<action name="deleteProject" method="delete"
 			class="projectAction">
