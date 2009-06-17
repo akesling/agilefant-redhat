@@ -1,6 +1,6 @@
-Agilefant 1.6
+Agilefant 1.6.1
 RELEASE NOTES
-10.6.2009 
+16.6.2009 
 
 INSTALLATION INSTRUCTIONS AND SYSTEM REQUIREMENTS
 -------------------------------------------------
