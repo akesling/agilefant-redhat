@@ -1,6 +1,5 @@
 package fi.hut.soberit.agilefant.web.tag;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.jsp.JspException;
