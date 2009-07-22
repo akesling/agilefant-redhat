@@ -13,6 +13,7 @@ import fi.hut.soberit.agilefant.business.impl.BacklogItemBusinessImpl;
 import fi.hut.soberit.agilefant.business.impl.HourEntryBusinessImpl;
 import fi.hut.soberit.agilefant.db.BacklogItemDAO;
 import fi.hut.soberit.agilefant.db.BacklogItemHourEntryDAO;
+import fi.hut.soberit.agilefant.db.IterationGoalDAO;
 import fi.hut.soberit.agilefant.exception.ObjectNotFoundException;
 import fi.hut.soberit.agilefant.model.AFTime;
 import fi.hut.soberit.agilefant.model.Backlog;
@@ -521,9 +522,11 @@ public class BacklogItemBusinessTest extends TestCase {
         BacklogItemDAO dao = createMock(BacklogItemDAO.class);
         HistoryBusiness hBuss = createMock(HistoryBusiness.class);
         BacklogBusiness blBuss = createMock(BacklogBusiness.class);
+        IterationGoalDAO igdao = createMock(IterationGoalDAO.class);
         testable.setBacklogItemDAO(dao);
         testable.setHistoryBusiness(hBuss);
         testable.setBacklogBusiness(blBuss);
+        testable.setIterationGoalDAO(igdao);
 
         BacklogItem persisted = new BacklogItem();
         persisted.setId(1);
