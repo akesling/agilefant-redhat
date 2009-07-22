@@ -301,6 +301,7 @@ public class BacklogBusinessImpl implements BacklogBusiness {
                     }
                 }
                 
+                //Down stepping from Product/Project Story to Iteration Task
                 boolean isTargetIteration = targetBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
                 boolean isSourceIteration = sourceBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
                 if (isTargetIteration && !isSourceIteration) {
