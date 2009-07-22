@@ -146,8 +146,6 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
             storable.setEffortLeft(storable.getOriginalEstimate());
         }
         
-        Backlog originalBacklog = storable.getBacklog();
-        
         if(storable.getBacklog() != null && storable.getBacklog() != backlog) {
             this.moveItemToBacklog(storable, backlog, false);
             historyUpdated = true;
@@ -157,23 +155,10 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         
         storable.setResponsibles(responsibles);
         
-        if (iterationGoal == null) {
-            //Down stepping from Product/Project Story to Iteration Task
-            boolean isTargetIteration = backlog instanceof fi.hut.soberit.agilefant.model.Iteration;
-            boolean isSourceIteration = originalBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
-            if (isTargetIteration && !isSourceIteration) {
-                Collection<BacklogItem> itemSet = new HashSet<BacklogItem>();
-                itemSet.add(storable);
-                
-                iterationGoal = new IterationGoal();
-                iterationGoal.setName(storable.getName());
-                iterationGoal.setIteration((Iteration) backlog);
-                iterationGoal.setBacklogItems(itemSet);
-                iterationGoalDAO.store(iterationGoal);
-            }
+        if (storable.getIterationGoal() == null) {
+            this.setBacklogItemIterationGoal(storable, iterationGoal);
         }
         
-        this.setBacklogItemIterationGoal(storable, iterationGoal);              
         BacklogItem persisted;
         
         if(storable.getId() == 0) {
@@ -201,7 +186,22 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         if(item.getIterationGoal() != null && !ignoreIterationGoal) {
             item.getIterationGoal().getBacklogItems().remove(item);
             item.setIterationGoal(null);
-        }        
+        }       
+        
+        //Down stepping from Product/Project Story to Iteration Task
+        boolean isTargetIteration = backlog instanceof fi.hut.soberit.agilefant.model.Iteration;
+        boolean isSourceIteration = oldBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
+        if (isTargetIteration && !isSourceIteration) {
+            Collection<BacklogItem> itemSet = new HashSet<BacklogItem>();
+            itemSet.add(item);
+            
+            IterationGoal iterationGoal = new IterationGoal();
+            iterationGoal.setName(item.getName());
+            iterationGoal.setIteration((Iteration) backlog);
+            iterationGoal.setBacklogItems(itemSet);
+            iterationGoalDAO.store(iterationGoal);
+            this.setBacklogItemIterationGoal(item, iterationGoal);
+        }
         
         if(!backlogBusiness.isUnderSameProduct(oldBacklog, backlog)) {
             //remove only product themes
