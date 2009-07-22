@@ -548,6 +548,8 @@ public class BacklogItemBusinessTest extends TestCase {
 
         testable.storeBacklogItem(persisted, iter, dataItem, null, null);
         assertEquals(iter, persisted.getBacklog());
+        //Added assertNotNull to verify IterationGoal is associated with BacklogItem
+        assertNotNull(persisted.getIterationGoal());
         
         verify(dao);
         verify(hBuss);
