@@ -312,7 +312,9 @@ public class BacklogBusinessImpl implements BacklogBusiness {
                     targetIterationGoal.setIteration((Iteration) targetBacklog);
                     targetIterationGoal.setBacklogItems(itemSet);
                     bli.setIterationGoal(targetIterationGoal);
+                    iterationGoalDAO.store(targetIterationGoal);
                 }
+                
                 // Set backlog item's backlog to target backlog
                 bli.setBacklog(targetBacklog);
                 backlogItemDAO.store(bli);
