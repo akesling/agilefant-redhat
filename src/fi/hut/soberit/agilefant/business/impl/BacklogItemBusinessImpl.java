@@ -146,6 +146,8 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
             storable.setEffortLeft(storable.getOriginalEstimate());
         }
         
+        Backlog originalBacklog = storable.getBacklog();
+        
         if(storable.getBacklog() != null && storable.getBacklog() != backlog) {
             this.moveItemToBacklog(storable, backlog, false);
             historyUpdated = true;
@@ -157,9 +159,8 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         
         if (iterationGoal == null) {
             //Down stepping from Product/Project Story to Iteration Task
-            Backlog oldBacklog = storable.getBacklog();
             boolean isTargetIteration = backlog instanceof fi.hut.soberit.agilefant.model.Iteration;
-            boolean isSourceIteration = oldBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
+            boolean isSourceIteration = originalBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
             if (isTargetIteration && !isSourceIteration) {
                 Collection<BacklogItem> itemSet = new HashSet<BacklogItem>();
                 itemSet.add(storable);
