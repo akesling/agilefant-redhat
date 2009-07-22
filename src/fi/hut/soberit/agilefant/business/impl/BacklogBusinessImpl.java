@@ -300,7 +300,19 @@ public class BacklogBusinessImpl implements BacklogBusiness {
                         bli.getBusinessThemes().clear();
                     }
                 }
-
+                
+                boolean isTargetIteration = targetBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
+                boolean isSourceIteration = sourceBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
+                if (isTargetIteration && !isSourceIteration) {
+                    Collection<BacklogItem> itemSet = new HashSet<BacklogItem>();
+                    itemSet.add(bli);
+                    
+                    IterationGoal targetIterationGoal = new IterationGoal();
+                    targetIterationGoal.setName(bli.getName());
+                    targetIterationGoal.setIteration((Iteration) targetBacklog);
+                    targetIterationGoal.setBacklogItems(itemSet);
+                    bli.setIterationGoal(targetIterationGoal);
+                }
                 // Set backlog item's backlog to target backlog
                 bli.setBacklog(targetBacklog);
                 backlogItemDAO.store(bli);
