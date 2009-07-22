@@ -155,24 +155,24 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         
         storable.setResponsibles(responsibles);
         
-        this.setBacklogItemIterationGoal(storable, iterationGoal);
-        
-        //Down stepping from Product/Project Story to Iteration Task
-        Backlog oldBacklog = storable.getBacklog();
-        boolean isTargetIteration = backlog instanceof fi.hut.soberit.agilefant.model.Iteration;
-        boolean isSourceIteration = oldBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
-        if (isTargetIteration && !isSourceIteration) {
-            Collection<BacklogItem> itemSet = new HashSet<BacklogItem>();
-            itemSet.add(storable);
-            
-            IterationGoal targetIterationGoal = new IterationGoal();
-            targetIterationGoal.setName(storable.getName());
-            targetIterationGoal.setIteration((Iteration) backlog);
-            targetIterationGoal.setBacklogItems(itemSet);
-            storable.setIterationGoal(targetIterationGoal);
-            iterationGoalDAO.store(targetIterationGoal);
+        if (iterationGoal == null) {
+            //Down stepping from Product/Project Story to Iteration Task
+            Backlog oldBacklog = storable.getBacklog();
+            boolean isTargetIteration = backlog instanceof fi.hut.soberit.agilefant.model.Iteration;
+            boolean isSourceIteration = oldBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
+            if (isTargetIteration && !isSourceIteration) {
+                Collection<BacklogItem> itemSet = new HashSet<BacklogItem>();
+                itemSet.add(storable);
+                
+                iterationGoal = new IterationGoal();
+                iterationGoal.setName(storable.getName());
+                iterationGoal.setIteration((Iteration) backlog);
+                iterationGoal.setBacklogItems(itemSet);
+                iterationGoalDAO.store(iterationGoal);
+            }
         }
         
+        this.setBacklogItemIterationGoal(storable, iterationGoal);              
         BacklogItem persisted;
         
         if(storable.getId() == 0) {
