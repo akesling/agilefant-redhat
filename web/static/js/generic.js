@@ -240,6 +240,7 @@ function getIterationGoals(backlogId, element, preselectedId) {
         
         if (data.length > 0) {
             select.parents('tr:eq(0)').show();
+            select.empty();
             $('<option/>').attr('value','').attr('class','inactive').text('(Create Without Story)').appendTo(select);
             for (var i = 0; i < data.length; i++) {
                 var opt = $('<option/>').attr('value',data[i].id).text(data[i].name).appendTo(select);
@@ -251,7 +252,7 @@ function getIterationGoals(backlogId, element, preselectedId) {
         else {
         	if (element == "#createTaskIterGoalSelect") {
         		select.empty();
-        		$('<option/>').attr('value','0').attr('class','inactive').text('(You Must First Select an Iteration)').appendTo(select);
+        		$('<option/>').attr('value','').attr('class','inactive').text('(You Must First Select an Iteration)').appendTo(select);
         	} else {
                 select.parents('tr:eq(0)').hide();
                 select.empty();
