@@ -223,12 +223,27 @@ Agilefant
         <c:when test="${hasProducts}">
             <ww:url id="createLink" action="ajaxCreateBacklogItem"
                 includeParams="none" />
-            <ww:a href="%{createLink}" onclick="return false;" title="Create a new story/task" cssClass="openCreateDialog openBacklogItemDialog">Story/task &raquo;</ww:a>
+            <ww:a href="%{createLink}" onclick="return false;" title="Create a new story" cssClass="openCreateDialog openBacklogItemDialog">Story &raquo;</ww:a>
         </c:when>
         <c:otherwise>
             <span class="inactive"
                 title="Create a product before creating a story/task">
-            Story/task &raquo;</span>
+            Story &raquo;</span>
+        </c:otherwise>
+    </c:choose>
+    </li>
+    
+    <li>
+    <c:choose>
+        <c:when test="${hasProducts}">
+            <ww:url id="createLink" action="ajaxCreateBacklogItem"
+                includeParams="none" />
+            <ww:a href="%{createLink}" onclick="return false;" title="Create a new Task" cssClass="openCreateDialog openBacklogItemDialog">Task &raquo;</ww:a>
+        </c:when>
+        <c:otherwise>
+            <span class="inactive"
+                title="Create a product before creating a task">
+            Task &raquo;</span>
         </c:otherwise>
     </c:choose>
     </li>
