@@ -406,7 +406,7 @@ var productId = ${product.id};
                             <tr>
                             <td>
 	                    <ww:url
-					id="createBacklogItemLink" action="ajaxCreateBacklogItem"
+					id="createBacklogItemLink" action="ajaxCreateStory"
 					includeParams="none">
 					<ww:param name="backlogId" value="${product.id}" />
 				</ww:url> <ww:a cssClass="openCreateDialog openBacklogItemDialog"
