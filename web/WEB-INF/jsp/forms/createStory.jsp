@@ -3,7 +3,6 @@
 <aef:userList />
 <aef:teamList />
 <aef:currentUser />
-<aef:iterationGoalList id="iterationGoals" backlogId="${backlogId}" />
 <aef:productList />
 
 <script type="text/javascript">
@@ -20,8 +19,6 @@ $(document).ready(function() {
         backlogIdField: '#createBLIBacklogId',
         userListContainer: '#userListContainer-createBLI'
     });
-    getIterationGoals($('#createBLIBacklogId').val(),
-        '#createBLIIterGoalSelect', '${iterationGoalId}');
 });
 
 </script>
@@ -71,7 +68,7 @@ $(document).ready(function() {
 			<td></td>
 			<td colspan="2">
 			
-			<select name="backlogId" id="createBLIBacklogId" onchange="getIterationGoals(this.value, '#createBLIIterGoalSelect');">
+			<select name="backlogId" id="createBLIBacklogId">
 				<%-- Generate a drop-down list showing all backlogs in a hierarchical manner --%>
 				<option class="inactive" value="">(select backlog)</option>
 				<c:forEach items="${productList}" var="product">
