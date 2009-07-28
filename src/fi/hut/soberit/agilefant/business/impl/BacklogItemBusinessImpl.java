@@ -146,8 +146,9 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
             storable.setEffortLeft(storable.getOriginalEstimate());
         }
         
-
+        boolean isBeingMoved = false;
         if(storable.getBacklog() != null && storable.getBacklog() != backlog) {
+            isBeingMoved = true;
             this.moveItemToBacklog(storable, backlog, false);
             historyUpdated = true;
         } else if(storable.getBacklog() == null) {
@@ -156,7 +157,7 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         
         storable.setResponsibles(responsibles);
         
-        if (iterationGoal != null) {
+        if (!isBeingMoved) {
             this.setBacklogItemIterationGoal(storable, iterationGoal);              
         }
         
