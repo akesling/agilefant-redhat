@@ -728,17 +728,19 @@ TaskModel.prototype.moveTo = function(storyId, iterationId) {
 	if(storyId !== this.iterationGoal.id || (storyId === 0 && iterationId !== this.backlog.getId())) {
 		this.iterationGoal.removeTask(this, true);
 		if(iterationId === this.backlog.getId()) {
-			var newStory = ModelFactory.getIterationGoal(storyId);
 			var oldStory = this.iterationGoal;
+			var newStory = ModelFactory.getIterationGoal(storyId);
+
 			
 			if (newStory == undefined) {
 				newStory = this.iterationGoal.iteration.getPseudoGoal();
 			}
 
 			newStory.addTask(this, false);
-			this.save(false);
-			oldStory.reloadMetrics();
-			newStory.reloadMetrics();	
+			this.save(false, function() {
+				oldStory.reloadMetrics();
+				newStory.reloadMetrics();
+			});
 		} else {
 			this.backlog = {getId: function() { return iterationId; }};
 			this.iterationGoal = {id: storyId};
