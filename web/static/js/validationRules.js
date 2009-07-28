@@ -94,6 +94,16 @@ jQuery.validator.addMethod("unique", function(value, element, param) {
     return valid;
 });
 
+/**
+ * param should be the backlog type.
+ */
+jQuery.validator.addMethod("backlogType",function(value, element, param) {
+	var elem = $(element).children('option[value='+value+']');
+    if (elem.hasClass(param.toLowerCase()+'Option')) {
+    	return true;
+    }
+    return false;
+});
 
 var agilefantValidationRules = {
     empty: { },
@@ -270,6 +280,32 @@ var agilefantValidationRules = {
            }
 	   }
 	},
+	task: {
+		   rules: {
+		       "backlogItem.name": {
+		           required: true
+		       },
+		       "backlogId": {
+		           required: true,
+		           backlogType: "iteration"
+		       },
+		       "backlogItem.originalEstimate": {
+		           aftime: [ false ]
+		       }
+		   },
+		   messages: {
+		       "backlogItem.name": {
+	               required: "Please enter a name"
+	           },
+	           "backlogId": {
+	               required: "Please select an iteration",
+	               backlogType: "Must select an iteration"
+	           },
+	           "backlogItem.originalEstimate": {
+	               aftime: "Invalid format"
+	           }
+		   }
+		},
     hourEntry: {
        rules: {
            "hourEntry.timeSpent": {
@@ -505,6 +541,7 @@ jQuery.each(agilefantValidationRules, function() {
 var validationRulesByHTMLClass = {
     'validateNewBacklogItem': agilefantValidationRules.backlogItem,
     'validateBacklogItem': agilefantValidationRules.backlogItem,
+    'validateNewTask': agilefantValidationRules.task,
     'validateNewHourEntry': agilefantValidationRules.hourEntry,
     'validateNewIteration': agilefantValidationRules.iteration,
     'validateIteration': agilefantValidationRules.iteration,

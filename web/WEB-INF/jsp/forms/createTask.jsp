@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 </script>
 
-<div class="validateWrapper validateNewBacklogItem">
+<div class="validateWrapper validateNewTask">
 <ww:form action="storeNewBacklogItem" method="post">
 	<ww:hidden name="fromTodoId" />
 	<table class="formTable">
@@ -117,7 +117,7 @@ $(document).ready(function() {
 			<td></td>
 			<%-- If iteration goals doesn't exist default value is 0--%>
 			<td colspan="2">
-			<select name="iterationGoalId" id="createTaskIterGoalSelect">
+			<select name="iterationGoalId" id="createTaskIterGoalSelect" class="error">
 				<option class="inactive" value="">(You Must First Select an Iteration)</option>
 			</select>
 			</td>
