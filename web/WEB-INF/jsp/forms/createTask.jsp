@@ -118,6 +118,7 @@ $(document).ready(function() {
 			<%-- If iteration goals doesn't exist default value is 0--%>
 			<td colspan="2">
 			<select name="iterationGoalId" id="createTaskIterGoalSelect">
+				<option class="inactive" value="">(You Must First Select an Iteration)</option>
 			</select>
 			</td>
 		</tr>

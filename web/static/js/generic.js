@@ -249,8 +249,12 @@ function getIterationGoals(backlogId, element, preselectedId) {
             }
         }
         else {
-        	if (element != "#createTaskIterGoalSelect") {
+        	if (element == "#createTaskIterGoalSelect") {
+        		select.empty();
+        		$('<option/>').attr('value','0').attr('class','inactive').text('(You Must First Select an Iteration)').appendTo(select);
+        	} else {
                 select.parents('tr:eq(0)').hide();
+                select.empty();
         	}
         }
     });
