@@ -24,7 +24,7 @@ $(document).ready(function() {
 </script>
 
 <div class="validateWrapper validateNewBacklogItem">
-<ww:form action="storeNewBacklogItem" method="post">
+<ww:form action="storeNewStory" method="post">
 	<ww:hidden name="fromTodoId" />
 	<table class="formTable">
 		<tr>

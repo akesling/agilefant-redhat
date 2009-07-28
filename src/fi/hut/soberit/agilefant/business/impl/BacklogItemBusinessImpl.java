@@ -156,8 +156,7 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         
         storable.setResponsibles(responsibles);
         
-        iterationGoal = storable.getIterationGoal();
-        if (iterationGoal == null) {
+        if (iterationGoal != null) {
             this.setBacklogItemIterationGoal(storable, iterationGoal);              
         }
         
