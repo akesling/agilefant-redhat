@@ -4,6 +4,7 @@
 <aef:currentUser />
 <aef:userList />
 <aef:teamList />
+<aef:iterationGoalList id="iterationGoals" backlogId="${backlogId}" />
 <aef:productList />
 
 <div class="ajaxWindowTabsDiv">
@@ -221,7 +222,8 @@ $(document).ready(function() {
 				<td>Backlog</td>
 				<td></td>
 				<td colspan="2">
-					<select name="backlogId" id="backlogSelect-${backlogItemId}-${bliListContext}">
+					<select name="backlogId" id="backlogSelect-${backlogItemId}-${bliListContext}"
+					   onchange="getIterationGoals(this.value, '#iterationGoalSelectBLI-${backlogItemId}-${bliListContext}')">
 	
 					<%-- Generate a drop-down list showing all backlogs in a hierarchical manner --%>
 					<option class="inactive" value="">(select backlog)</option>
@@ -259,6 +261,32 @@ $(document).ready(function() {
 						</c:forEach>
 					</c:forEach>
 				</select></td>
+			</tr>
+			<tr style="display: none">
+				<td>Story</td>
+				<td></td>
+				<%-- If iteration goals doesn't exist default value is 0--%>
+                <td colspan="2">
+                    <c:set var="goalId" value="0" scope="page" />
+                    <c:if test="${iterationGoalId > 0}">
+                        <c:set var="goalId" value="${iterationGoalId}" />
+                    </c:if>
+                    <c:if test="${!empty backlogItem.iterationGoal}">
+                        <c:set var="goalId" value="${backlogItem.iterationGoal.id}"
+                            scope="page" />
+                    </c:if>
+                    <c:choose>
+                    	<c:when test="${!empty iterationGoals}">
+                    <ww:select headerKey="0" headerValue="(none)"
+                        id="iterationGoalSelectBLI-${backlogItemId}-${bliListContext}"
+                        name="iterationGoalId" list="#attr.iterationGoals"
+                        listKey="id" listValue="name" value="${goalId}" />
+                     </c:when>
+                     <c:otherwise>
+                       <select id="iterationGoalSelectBLI-${backlogItemId}-${bliListContext}" name="iterationGoalId"></select>
+                     </c:otherwise>
+                    </c:choose>
+                </td>
 			</tr>
 			<tr>
 				<td>Priority</td>

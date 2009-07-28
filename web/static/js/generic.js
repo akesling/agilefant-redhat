@@ -239,9 +239,14 @@ function getIterationGoals(backlogId, element, preselectedId) {
         var select = $(element);
         
         if (data.length > 0) {
+            var defaultMessage = '(none)';
+            if (element == "#createTaskIterGoalSelect") {
+            	defaultMessage = '(Create Without Story)';
+            }
+        	
             select.parents('tr:eq(0)').show();
             select.empty();
-            $('<option/>').attr('value','').attr('class','inactive').text('(Create Without Story)').appendTo(select);
+            $('<option/>').attr('value','').attr('class','inactive').text(defaultMessage).appendTo(select);
             for (var i = 0; i < data.length; i++) {
                 var opt = $('<option/>').attr('value',data[i].id).text(data[i].name).appendTo(select);
                 if (preselectedId == data[i].id) {
@@ -252,12 +257,13 @@ function getIterationGoals(backlogId, element, preselectedId) {
         else {
         	if (element == "#createTaskIterGoalSelect") {
         		select.empty();
-        		var message = '(You Must First Select an Iteration)';
+        		var defaultMessage = '(You Must First Select an Iteration)';
         		if ($("#createBLIBacklogId").children('option[value='+backlogId+']').hasClass("iterationOption")) {
-        			message = '(Create Without Story)';
+        			defaultMessage = '(Create Without Story)';
         		} 
-    			$('<option/>').attr('value','').attr('class','inactive').text(message).appendTo(select);
-        	} else {
+    			$('<option/>').attr('value','').attr('class','inactive').text(defaultMessage).appendTo(select);
+        	}
+        	else {
                 select.parents('tr:eq(0)').hide();
                 select.empty();
         	}
