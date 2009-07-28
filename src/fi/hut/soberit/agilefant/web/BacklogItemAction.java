@@ -227,6 +227,7 @@ public class BacklogItemAction extends ActionSupport implements CRUDAction {
     }
     
     public String ajaxStoreStory() {
+        /*
         if(iterationGoalId < 1) {
             try {
                 if (this.backlogItem.getName() == null || 
@@ -244,6 +245,7 @@ public class BacklogItemAction extends ActionSupport implements CRUDAction {
                 return CRUDAction.AJAX_ERROR;
             }
         }
+        */
         return this.ajaxStoreBacklogItem();
     }
     

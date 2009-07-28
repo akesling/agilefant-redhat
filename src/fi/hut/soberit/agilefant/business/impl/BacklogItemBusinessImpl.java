@@ -146,7 +146,9 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
             storable.setEffortLeft(storable.getOriginalEstimate());
         }
         
+        Backlog originalBacklog = storable.getBacklog();
         boolean isBeingMoved = false;
+        
         if(storable.getBacklog() != null && storable.getBacklog() != backlog) {
             isBeingMoved = true;
             this.moveItemToBacklog(storable, backlog, false);
@@ -157,10 +159,20 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         
         storable.setResponsibles(responsibles);
         
-        if (!isBeingMoved) {
-            this.setBacklogItemIterationGoal(storable, iterationGoal);              
+        if (iterationGoal == null) {
+            //Down stepping from Product/Project Story to Iteration Task
+            boolean isTargetIteration = backlog instanceof fi.hut.soberit.agilefant.model.Iteration;
+            boolean isSourceIteration = originalBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
+            if (isTargetIteration && !isSourceIteration) {
+                //Not using iterationGoalBusiness because of circular dependency in Spring.
+                iterationGoal = new IterationGoal();
+                iterationGoal.setName(storable.getName());
+                iterationGoal.setIteration((Iteration) backlog);
+                iterationGoalDAO.store(iterationGoal);
+            }
         }
         
+        this.setBacklogItemIterationGoal(storable, iterationGoal);   
         BacklogItem persisted;
         
         if(storable.getId() == 0) {
@@ -188,18 +200,6 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         if(item.getIterationGoal() != null && !ignoreIterationGoal) {
             item.getIterationGoal().getBacklogItems().remove(item);
             item.setIterationGoal(null);
-        }
-        
-        //Down stepping from Product/Project Story to Iteration Task
-        boolean isTargetIteration = backlog instanceof fi.hut.soberit.agilefant.model.Iteration;
-        boolean isSourceIteration = oldBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
-        if (isTargetIteration && !isSourceIteration) {
-            //Not using iterationGoalBusiness because of circular dependency in Spring.
-            IterationGoal iterationGoal = new IterationGoal();
-            iterationGoal.setName(item.getName());
-            iterationGoal.setIteration((Iteration) backlog);
-            iterationGoalDAO.store(iterationGoal);
-            this.setBacklogItemIterationGoal(item, iterationGoal);
         }
         
         if(!backlogBusiness.isUnderSameProduct(oldBacklog, backlog)) {
