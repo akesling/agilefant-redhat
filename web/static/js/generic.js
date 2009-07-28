@@ -252,7 +252,11 @@ function getIterationGoals(backlogId, element, preselectedId) {
         else {
         	if (element == "#createTaskIterGoalSelect") {
         		select.empty();
-        		$('<option/>').attr('value','').attr('class','inactive').text('(You Must First Select an Iteration)').appendTo(select);
+        		var message = '(You Must First Select an Iteration)';
+        		if ($("#createBLIBacklogId").children('option[value='+backlogId+']').hasClass("iterationOption")) {
+        			message = '(Create Without Story)';
+        		} 
+    			$('<option/>').attr('value','').attr('class','inactive').text(message).appendTo(select);
         	} else {
                 select.parents('tr:eq(0)').hide();
                 select.empty();
