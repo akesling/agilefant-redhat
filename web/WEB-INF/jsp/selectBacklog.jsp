@@ -73,7 +73,7 @@ start by creating a new object.</p>
         <c:otherwise>
             <span class="inactive"
                 title="Create a product before creating a story">
-            Story/task &raquo;</span>
+            Story &raquo;</span>
         </c:otherwise>
     </c:choose>
     </li>
@@ -88,7 +88,7 @@ start by creating a new object.</p>
         <c:otherwise>
             <span class="inactive"
                 title="Create an iteration before creating a task">
-            Story/task &raquo;</span>
+            Task &raquo;</span>
         </c:otherwise>
     </c:choose>
     </li>
