@@ -17,6 +17,7 @@ import fi.hut.soberit.agilefant.business.BacklogItemBusiness;
 import fi.hut.soberit.agilefant.business.BusinessThemeBusiness;
 import fi.hut.soberit.agilefant.business.HistoryBusiness;
 import fi.hut.soberit.agilefant.business.HourEntryBusiness;
+import fi.hut.soberit.agilefant.business.IterationGoalBusiness;
 import fi.hut.soberit.agilefant.business.SettingBusiness;
 import fi.hut.soberit.agilefant.business.TaskBusiness;
 import fi.hut.soberit.agilefant.exception.ObjectNotFoundException;
@@ -24,6 +25,8 @@ import fi.hut.soberit.agilefant.model.AFTime;
 import fi.hut.soberit.agilefant.model.Backlog;
 import fi.hut.soberit.agilefant.model.BacklogItem;
 import fi.hut.soberit.agilefant.model.BusinessTheme;
+import fi.hut.soberit.agilefant.model.Iteration;
+import fi.hut.soberit.agilefant.model.IterationGoal;
 import fi.hut.soberit.agilefant.model.Priority;
 import fi.hut.soberit.agilefant.model.State;
 import fi.hut.soberit.agilefant.model.Task;
@@ -60,6 +63,8 @@ public class BacklogItemAction extends ActionSupport implements CRUDAction {
     private Set<Integer> themeIds = new HashSet<Integer>();
     
     private BacklogBusiness backlogBusiness;
+    
+    private IterationGoalBusiness iterationGoalBusiness;
 
     private BacklogItemBusiness backlogItemBusiness;
     
@@ -219,6 +224,31 @@ public class BacklogItemAction extends ActionSupport implements CRUDAction {
         }
         this.loadBacklogItemJSON();
         return CRUDAction.AJAX_SUCCESS;
+    }
+    
+    public String ajaxStoreStory() {
+        if(iterationGoalId < 1) {
+            try {
+                if (this.backlogItem.getName() == null || 
+                        this.backlogItem.getName().trim().equals("")) {
+                    return CRUDAction.AJAX_ERROR;
+                }
+                
+                Backlog backlog = backlogBusiness.getBacklog(backlogId);
+                if( backlog instanceof fi.hut.soberit.agilefant.model.Iteration) {
+                    IterationGoal iterationGoal = iterationGoalBusiness.store(0, backlogItem.getName(), backlog.getId(), "", 0);
+                    this.iterationGoalId = iterationGoal.getId();
+                }   
+              } 
+            catch (ObjectNotFoundException e) {
+                return CRUDAction.AJAX_ERROR;
+            }
+        }
+        return this.ajaxStoreBacklogItem();
+    }
+    
+    public String ajaxStoreTask() {
+        return this.ajaxStoreBacklogItem();
     }
     
     public String ajaxStoreBacklogItem() {
@@ -404,6 +434,10 @@ public class BacklogItemAction extends ActionSupport implements CRUDAction {
     
     public void setHistoryBusiness(HistoryBusiness historyBusiness) {
         this.historyBusiness = historyBusiness;
+    }
+    
+    public void setIterationGoalBusiness(IterationGoalBusiness iterationGoalBusiness) {
+        this.iterationGoalBusiness = iterationGoalBusiness;
     }
 
     public String getSpentEffort() {
