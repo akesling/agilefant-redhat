@@ -236,7 +236,7 @@ Agilefant
     <li>
     <c:choose>
         <c:when test="${hasProducts}">
-            <ww:url id="createLink" action="ajaxCreateBacklogItem"
+            <ww:url id="createLink" action="ajaxCreateTask"
                 includeParams="none" />
             <ww:a href="%{createLink}" onclick="return false;" title="Create a new Task" cssClass="openCreateDialog openBacklogItemDialog">Task &raquo;</ww:a>
         </c:when>

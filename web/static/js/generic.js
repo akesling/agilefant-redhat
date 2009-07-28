@@ -240,7 +240,7 @@ function getIterationGoals(backlogId, element, preselectedId) {
         
         if (data.length > 0) {
             select.parents('tr:eq(0)').show();
-            $('<option/>').attr('value','').attr('class','inactive').text('(none)').appendTo(select);
+            $('<option/>').attr('value','').attr('class','inactive').text('(Create Without Story)').appendTo(select);
             for (var i = 0; i < data.length; i++) {
                 var opt = $('<option/>').attr('value',data[i].id).text(data[i].name).appendTo(select);
                 if (preselectedId == data[i].id) {
@@ -249,7 +249,9 @@ function getIterationGoals(backlogId, element, preselectedId) {
             }
         }
         else {
-            select.parents('tr:eq(0)').hide();
+        	if (element != "#createTaskIterGoalSelect") {
+                select.parents('tr:eq(0)').hide();
+        	}
         }
     });
 }

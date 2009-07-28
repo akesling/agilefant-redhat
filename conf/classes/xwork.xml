@@ -195,6 +195,10 @@
             class="backlogItemAction">
             <result name="success" type="dispatcher">/WEB-INF/jsp/forms/createStory.jsp</result>
         </action>
+        <action name="ajaxCreateTask" method="create"
+            class="backlogItemAction">
+            <result name="success" type="dispatcher">/WEB-INF/jsp/forms/createTask.jsp</result>
+        </action>
 		<action name="quickStoreTaskList" method="quickStoreTaskList"
 			class="backlogItemAction">			
 			<result name="ajax_error" type="httpheader">
