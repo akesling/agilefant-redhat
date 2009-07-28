@@ -219,9 +219,6 @@
 		<action name="storeNewBacklogItem" method="ajaxStoreBacklogItem"
 			class="backlogItemAction">
 		</action>
-		<action name="storeNewStory" method="ajaxStoreStory"
-			class="backlogItemAction">
-		</action>
 
 		<action name="backlogItemTabs" method="edit"
 			class="backlogItemAction">

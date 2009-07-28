@@ -226,33 +226,6 @@ public class BacklogItemAction extends ActionSupport implements CRUDAction {
         return CRUDAction.AJAX_SUCCESS;
     }
     
-    public String ajaxStoreStory() {
-        /*
-        if(iterationGoalId < 1) {
-            try {
-                if (this.backlogItem.getName() == null || 
-                        this.backlogItem.getName().trim().equals("")) {
-                    return CRUDAction.AJAX_ERROR;
-                }
-                
-                Backlog backlog = backlogBusiness.getBacklog(backlogId);
-                if( backlog instanceof fi.hut.soberit.agilefant.model.Iteration) {
-                    IterationGoal iterationGoal = iterationGoalBusiness.store(0, backlogItem.getName(), backlog.getId(), "", 0);
-                    this.iterationGoalId = iterationGoal.getId();
-                }   
-              } 
-            catch (ObjectNotFoundException e) {
-                return CRUDAction.AJAX_ERROR;
-            }
-        }
-        */
-        return this.ajaxStoreBacklogItem();
-    }
-    
-    public String ajaxStoreTask() {
-        return this.ajaxStoreBacklogItem();
-    }
-    
     public String ajaxStoreBacklogItem() {
         if(this.bliStore() == false) {
             return CRUDAction.AJAX_ERROR;
