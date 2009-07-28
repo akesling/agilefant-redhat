@@ -227,7 +227,7 @@ Agilefant
         </c:when>
         <c:otherwise>
             <span class="inactive"
-                title="Create a product before creating a story/task">
+                title="Create a product before creating a story">
             Story &raquo;</span>
         </c:otherwise>
     </c:choose>
@@ -235,14 +235,14 @@ Agilefant
     
     <li>
     <c:choose>
-        <c:when test="${hasProducts}">
+        <c:when test="${hasIterations}">
             <ww:url id="createLink" action="ajaxCreateTask"
                 includeParams="none" />
             <ww:a href="%{createLink}" onclick="return false;" title="Create a new Task" cssClass="openCreateDialog openBacklogItemDialog">Task &raquo;</ww:a>
         </c:when>
         <c:otherwise>
             <span class="inactive"
-                title="Create a product before creating a task">
+                title="Create an iteration before creating a task">
             Task &raquo;</span>
         </c:otherwise>
     </c:choose>

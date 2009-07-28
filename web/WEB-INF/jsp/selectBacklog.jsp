@@ -66,13 +66,28 @@ start by creating a new object.</p>
     <li>
     <c:choose>
         <c:when test="${hasProducts}">
-            <ww:url id="createLink" action="ajaxCreateBacklogItem"
+            <ww:url id="createLink" action="ajaxCreateStory"
                 includeParams="none" />
-            <ww:a href="%{createLink}" title="Create a new story/task" cssClass="openCreateDialog openBacklogItemDialog" onclick="return false;">Story/task &raquo;</ww:a>
+            <ww:a href="%{createLink}" title="Create a new story" cssClass="openCreateDialog openBacklogItemDialog" onclick="return false;">Story &raquo;</ww:a>
         </c:when>
         <c:otherwise>
             <span class="inactive"
-                title="Create a product before creating a story/task">
+                title="Create a product before creating a story">
+            Story/task &raquo;</span>
+        </c:otherwise>
+    </c:choose>
+    </li>
+    
+    <li>
+    <c:choose>
+        <c:when test="${hasIterations}">
+            <ww:url id="createLink" action="ajaxCreateTask"
+                includeParams="none" />
+            <ww:a href="%{createLink}" title="Create a new task" cssClass="openCreateDialog openBacklogItemDialog" onclick="return false;">Task &raquo;</ww:a>
+        </c:when>
+        <c:otherwise>
+            <span class="inactive"
+                title="Create an iteration before creating a task">
             Story/task &raquo;</span>
         </c:otherwise>
     </c:choose>
