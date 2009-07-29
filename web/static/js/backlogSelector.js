@@ -64,7 +64,7 @@
 					me.storySelect.val(0);
 					var iteration = me.iterationSelect.val();
 					if(iteration > 0) {
-						me.selectStory(me.storySelect, iteration, "Select story");
+						me.selectStory(me.storySelect, iteration, "(Tasks without story.)");
 					}
 				} else {
 					me.options.onSelect.call(this);
