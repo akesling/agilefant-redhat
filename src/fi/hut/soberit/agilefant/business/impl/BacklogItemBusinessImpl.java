@@ -159,7 +159,7 @@ public class BacklogItemBusinessImpl implements BacklogItemBusiness {
         
         storable.setResponsibles(responsibles);
         
-        if (iterationGoal == null) {
+        if (iterationGoal == null && isBeingMoved) {
             //Down stepping from Product/Project Story to Iteration Task
             boolean isTargetIteration = backlog instanceof fi.hut.soberit.agilefant.model.Iteration;
             boolean isSourceIteration = originalBacklog instanceof fi.hut.soberit.agilefant.model.Iteration;
