@@ -30,6 +30,8 @@ $(document).ready(function() {
         backlogId: '#backlogSelect-${backlogItemId}-${bliListContext}',
         themeListContainer: '#themeListContainer-${backlogItemId}-${bliListContext}'
     });
+    getIterationGoals($('#backlogSelect-${backlogItemId}-${bliListContext}').val(),
+            '#iterationGoalSelectBLI-${backlogItemId}-${bliListContext}', '${iterationGoalId}');
 });
 
 </script>
