@@ -238,13 +238,20 @@ function getIterationGoals(backlogId, element, preselectedId) {
         { 'iterationId': backlogId }, function(data, status) {
         var select = $(element);
         
+
         if (data.length > 0) {
-            var defaultMessage = '(none)';
+            var defaultMessage = '(Move as Story)';
             if (element == "#createTaskIterGoalSelect") {
             	defaultMessage = '(Create Without Story)';
+            } else if ( select.parents('form:eq(0)').attr('id') == "ajaxStoreBacklogItem"
+            		&& select.parents('tbody:eq(0)').find('.originalBacklog').hasClass('iterationOption')) {
+            	defaultMessage = '(Tasks without story.)'
             }
-        	
+            
             select.parents('tr:eq(0)').show();
+            if (preselectedId == 0) {
+            	preselectedId = select.val()
+            }
             select.empty();
             $('<option/>').attr('value','').attr('class','inactive').text(defaultMessage).appendTo(select);
             for (var i = 0; i < data.length; i++) {

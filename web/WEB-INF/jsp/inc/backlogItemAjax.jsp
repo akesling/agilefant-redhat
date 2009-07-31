@@ -232,7 +232,7 @@ $(document).ready(function() {
 					<c:forEach items="${productList}" var="product">
 						<c:choose>
 							<c:when test="${product.id == backlogItem.backlog.id}">
-								<option selected="selected" value="${product.id}" class="productOption"
+								<option selected="selected" value="${product.id}" class="productOption originalBacklog"
 									title="${product.name}">${aef:out(product.name)}</option>
 							</c:when>
 							<c:otherwise>
@@ -242,7 +242,7 @@ $(document).ready(function() {
 						<c:forEach items="${product.projects}" var="project">
 							<c:choose>
 								<c:when test="${project.id == backlogItem.backlog.id}">
-									<option selected="selected" value="${project.id}" class="projectOption"
+									<option selected="selected" value="${project.id}" class="projectOption originalBacklog"
 										title="${project.name}">${aef:out(project.name)}</option>
 								</c:when>
 								<c:otherwise>
@@ -252,7 +252,7 @@ $(document).ready(function() {
 							<c:forEach items="${project.iterations}" var="iteration">
 								<c:choose>
 									<c:when test="${iteration.id == backlogItem.backlog.id}">
-										<option selected="selected" value="${iteration.id}" class="iterationOption"
+										<option selected="selected" value="${iteration.id}" class="iterationOption originalBacklog"
 											title="${iteration.name}">${aef:out(iteration.name)}</option>
 									</c:when>
 									<c:otherwise>
